@@ -50,6 +50,8 @@ dist: clean
 	tar -cf dwm-${VERSION}.tar dwm-${VERSION}
 	gzip dwm-${VERSION}.tar
 	rm -rf dwm-${VERSION}
+	rm config.h
+	rm patches.h
 
 install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin

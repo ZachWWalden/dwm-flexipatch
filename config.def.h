@@ -5,7 +5,7 @@
 static const unsigned int borderpx       = 0;   /* border pixel of windows */
 static const int corner_radius           = 10;
 #else
-static const unsigned int borderpx       = 1;   /* border pixel of windows */
+static const unsigned int borderpx       = 3;   /* border pixel of windows */
 #endif // ROUNDED_CORNERS_PATCH
 static const unsigned int snap           = 32;  /* snap pixel */
 #if SWALLOW_PATCH
@@ -15,10 +15,10 @@ static const int swallowfloating         = 0;   /* 1 means swallow floating wind
 static int nomodbuttons                  = 1;   /* allow client mouse button bindings that have no modifier */
 #endif // NO_MOD_BUTTONS_PATCH
 #if VANITYGAPS_PATCH
-static const unsigned int gappih         = 20;  /* horiz inner gap between windows */
-static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
+static const unsigned int gappih         = 5;  /* horiz inner gap between windows */
+static const unsigned int gappiv         = 5;  /* vert inner gap between windows */
 static const unsigned int gappoh         = 10;  /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 30;  /* vert outer gap between windows and screen edge */
+static const unsigned int gappov         = 10;  /* vert outer gap between windows and screen edge */
 static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 #endif // VANITYGAPS_PATCH
 #if AUTOSTART_PATCH
@@ -127,41 +127,41 @@ static void (*bartabmonfns[])(Monitor *) = { NULL /* , customlayoutfn */ };
 #if BAR_PANGO_PATCH
 static const char font[]                 = "monospace 10";
 #else
-static const char *fonts[]               = { "monospace:size=10" };
+static const char *fonts[]               = { "monospace:size=11", "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 #endif // BAR_PANGO_PATCH
-static const char dmenufont[]            = "monospace:size=10";
+static const char dmenufont[]            = "monospace:size=11";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
 #if BAR_FLEXWINTITLE_PATCH
 #endif // BAR_FLEXWINTITLE_PATCH
 static char normfgcolor[]                = "#bbbbbb";
-static char normbgcolor[]                = "#222222";
+static char normbgcolor[]                = "#010101";
 static char normbordercolor[]            = "#444444";
 static char normfloatcolor[]             = "#db8fd9";
 
 static char selfgcolor[]                 = "#eeeeee";
-static char selbgcolor[]                 = "#005577";
+static char selbgcolor[]                 = "#010101";
 static char selbordercolor[]             = "#005577";
 static char selfloatcolor[]              = "#005577";
 
 static char titlenormfgcolor[]           = "#bbbbbb";
-static char titlenormbgcolor[]           = "#222222";
+static char titlenormbgcolor[]           = "#010101";
 static char titlenormbordercolor[]       = "#444444";
 static char titlenormfloatcolor[]        = "#db8fd9";
 
 static char titleselfgcolor[]            = "#eeeeee";
-static char titleselbgcolor[]            = "#005577";
+static char titleselbgcolor[]            = "#010101";
 static char titleselbordercolor[]        = "#005577";
 static char titleselfloatcolor[]         = "#005577";
 
 static char tagsnormfgcolor[]            = "#bbbbbb";
-static char tagsnormbgcolor[]            = "#222222";
+static char tagsnormbgcolor[]            = "#010101";
 static char tagsnormbordercolor[]        = "#444444";
 static char tagsnormfloatcolor[]         = "#db8fd9";
 
 static char tagsselfgcolor[]             = "#eeeeee";
-static char tagsselbgcolor[]             = "#005577";
+static char tagsselbgcolor[]             = "#010101";
 static char tagsselbordercolor[]         = "#005577";
 static char tagsselfloatcolor[]          = "#005577";
 
@@ -212,7 +212,7 @@ static char selfloatbgcolor[]            = "#117799";
 #endif // BAR_FLEXWINTITLE_PATCH
 
 #if BAR_ALPHA_PATCH
-static const unsigned int baralpha = 0xd0;
+static const unsigned int baralpha = 0xc7;
 static const unsigned int borderalpha = OPAQUE;
 static const unsigned int alphas[][3] = {
 	/*                       fg      bg        border     */
@@ -654,47 +654,47 @@ static const Layout layouts[] = {
 #else
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	#if TILE_LAYOUT
+	#if TILE_LAYOUT //Yes 0
 	{ "[]=",      tile },    /* first entry is default */
 	#endif
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	#if MONOCLE_LAYOUT
+	{ "><>",      NULL },    /* no layout function means floating behavior 1 */
+	#if MONOCLE_LAYOUT //Yes 2
 	{ "[M]",      monocle },
 	#endif
-	#if BSTACK_LAYOUT
+	#if BSTACK_LAYOUT //Yes 3
 	{ "TTT",      bstack },
 	#endif
-	#if BSTACKHORIZ_LAYOUT
+	#if BSTACKHORIZ_LAYOUT //No
 	{ "===",      bstackhoriz },
 	#endif
-	#if CENTEREDMASTER_LAYOUT
+	#if CENTEREDMASTER_LAYOUT //Yes 4
 	{ "|M|",      centeredmaster },
 	#endif
-	#if CENTEREDFLOATINGMASTER_LAYOUT
+	#if CENTEREDFLOATINGMASTER_LAYOUT //No
 	{ ">M>",      centeredfloatingmaster },
 	#endif
-	#if COLUMNS_LAYOUT
+	#if COLUMNS_LAYOUT //No
 	{ "|||",      col },
 	#endif
-	#if DECK_LAYOUT
+	#if DECK_LAYOUT //Yes 5
 	{ "[D]",      deck },
 	#endif
-	#if FIBONACCI_SPIRAL_LAYOUT
+	#if FIBONACCI_SPIRAL_LAYOUT //No
 	{ "(@)",      spiral },
 	#endif
-	#if FIBONACCI_DWINDLE_LAYOUT
+	#if FIBONACCI_DWINDLE_LAYOUT //Yes 6
 	{ "[\\]",     dwindle },
 	#endif
-	#if GRIDMODE_LAYOUT
+	#if GRIDMODE_LAYOUT //No
 	{ "HHH",      grid },
 	#endif
-	#if HORIZGRID_LAYOUT
+	#if HORIZGRID_LAYOUT //Yes 7
 	{ "---",      horizgrid },
 	#endif
-	#if GAPPLESSGRID_LAYOUT
+	#if GAPPLESSGRID_LAYOUT //No
 	{ ":::",      gaplessgrid },
 	#endif
-	#if NROWGRID_LAYOUT
+	#if NROWGRID_LAYOUT //No
 	{ "###",      nrowgrid },
 	#endif
 	#if CYCLELAYOUTS_PATCH
@@ -967,7 +967,7 @@ static Key keys[] = {
 	#if BAR_WINTITLEACTIONS_PATCH
 	{ MODKEY|ControlMask,           XK_z,          showhideclient,         {0} },
 	#endif // BAR_WINTITLEACTIONS_PATCH
-	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
+	{ MODKEY,                       XK_q,          killclient,             {0} },
 	#if KILLUNSEL_PATCH
 	{ MODKEY|ShiftMask,             XK_x,          killunsel,              {0} },
 	#endif // KILLUNSEL_PATCH
